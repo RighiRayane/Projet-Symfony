@@ -77,8 +77,12 @@
 
 .speed-menu a {
     color: #fff;
+    text-decoration: none;
 }
 
 .speed-menu a {
     margin-right: 20px;
+}
+.bg-light-blue{
+    background-color: color #f4f7ff;
 }

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Doctrine\DBAL\Types\TextType;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -12,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RegisterUserType extends AbstractType
 {
@@ -26,7 +28,7 @@ class RegisterUserType extends AbstractType
             ])
             ->add('PlainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => [
+                'first_options'  => [                
                 'label' => 'Votre mot de passe',
                 'attr'=> [ 
                     'placeholder' => 'Choissisez votre mot de passe'
@@ -65,7 +67,14 @@ class RegisterUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'constraints' => [
+                new UniqueEntity([
+                    'entityClass' => User::class,
+                    'fields' => 'email'
+                ])
+            ],
             'data_class' => User::class,
         ]);
+
     }
 }
