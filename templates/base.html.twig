@@ -25,9 +25,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><Cc:ie></Cc:ie>Catégorie</a>
+                            <ul class="dropdown-menu">
+                            {% for category in allCategories %}
+                                <li><a class="dropdown-item" href="{{path('app_category', {slug : category.slug} )}}">{{category.name}}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li>
@@ -41,7 +47,10 @@
                 {% else %}
                     <a href="{{ path ('app_login') }}"><i data-feather="user"></i></a>
                 {% endif %}
-                    <a href=""><i data-feather="shopping-cart"></i></a>
+                    <a href="{{ path ('app_cart') }}">
+                    <i data-feather="shopping-cart"></i>
+                    <span class="badge text-bg-light">{{fullCartQuantity}}</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -63,7 +72,7 @@
         {% endblock %}
 
     <!-- FOOTER -->
-    <footer class="container">
+    <footer class="container mt-5">
         <p>&copy; 2017–2024 La Boutique Française <a href="#">CGV</a> &middot; <a href="#">CGU</a></p>
     </footer>
 </main>
