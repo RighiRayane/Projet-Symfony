@@ -86,3 +86,12 @@
 .bg-light-blue{
     background-color: color #f4f7ff;
 }
+#order_addresses .form-check
+{
+    background-color: aliceblue;
+    padding: 10px 25px;
+}
+.small-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
