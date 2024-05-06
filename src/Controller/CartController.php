@@ -11,14 +11,23 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CartController extends AbstractController
 {
-    #[Route('/panier', name: 'app_cart')]
-    public function index(Cart $cart): Response
+    #[Route('/panier{motif}', name: 'app_cart', defaults: ['motif' => null] )]
+    public function index(Cart $cart, $motif): Response
     {
+        if('motif' == 'annulation'){
+            $this->addFlash(
+                'info',
+                'Paiement annulé : Vous pouvez mettre à jour votre panier et votre commande'
+            );
+        }
+    
+
         return $this->render('cart/index.html.twig', [
             'cart' => $cart -> getCart(),
             'totalWt'=> $cart->getTotalWt(),
         ]);
     }
+    
 
     #[Route('/panier/decrease/{id}', name: 'app_cart_decrease')]
     public function decrease($id, Cart $cart): Response
@@ -57,4 +66,5 @@ class CartController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
+    
 }

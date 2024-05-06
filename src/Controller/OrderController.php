@@ -79,6 +79,7 @@ class OrderController extends AbstractController
 
             // récupération des données de commande de l'utilisateur
             $order = new Order();
+            $order->setUser($this->getUser());
             $order->setCreatedAt(new \DateTime());
             $order->setState(1);
             $order->setCarrierName($form->get('carriers')->getData()->getName());
@@ -107,6 +108,7 @@ class OrderController extends AbstractController
             'choices'=> $form->getData(),
             'cart' => $products,
             'totalWt'=> $cart->getTotalWt(),
+            'order' => $order,
         ]);
     }
 }

@@ -31,7 +31,8 @@ class PasswordController extends AbstractController
         }
 
         return $this->render('account/password/index.html.twig', [
-            'modifierMdp' => $form->createView()
+            'modifierMdp' => $form->createView(),
+            
         ]);
     }
 }
